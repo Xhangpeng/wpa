@@ -599,44 +599,54 @@ function NoticeViewer({
           border: "1px solid rgba(201,161,74,0.3)",
         }}
       >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close notice viewer"
+          className="absolute right-2 top-2 z-20 grid h-9 w-9 place-items-center rounded-full shadow-xl transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white sm:right-3 sm:top-3"
+          style={{
+            background: "var(--color-terracotta)",
+            color: "#fff",
+            border: "2px solid rgba(255,255,255,0.76)",
+          }}
+        >
+          <X size={18} strokeWidth={2.8} />
+        </button>
+
         {/* Toolbar */}
         <div
-          className="flex items-center justify-between px-5 py-3 shrink-0"
+          className="flex shrink-0 items-center justify-between gap-2 px-3 py-3 pr-14 sm:px-5 sm:pr-14"
           style={{
             background: "var(--color-forest-deep)",
             borderBottom: "2px solid var(--color-brass)",
           }}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <FileText size={16} style={{ color: "var(--color-brass)" }} />
             <span
-              className="text-[12px] font-medium truncate max-w-[250px] sm:max-w-[380px]"
+              className="max-w-[130px] truncate text-[12px] font-medium min-[380px]:max-w-[180px] sm:max-w-[380px]"
               style={{ color: "var(--color-parchment)" }}
             >
               {notice.title}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1">
             <button onClick={handleZoomOut} className="p-1.5 rounded-md transition-colors hover:bg-white/10" title="Zoom Out">
               <ZoomOut size={15} style={{ color: "var(--color-parchment)" }} />
             </button>
-            <span className="text-[11px] px-2 min-w-[36px] text-center font-medium" style={{ color: "var(--color-brass)" }}>
+            <span className="min-w-[32px] px-1 text-center text-[11px] font-medium sm:min-w-[36px] sm:px-2" style={{ color: "var(--color-brass)" }}>
               {zoom}%
             </span>
             <button onClick={handleZoomIn} className="p-1.5 rounded-md transition-colors hover:bg-white/10" title="Zoom In">
               <ZoomIn size={15} style={{ color: "var(--color-parchment)" }} />
             </button>
-            <div className="w-px h-4 mx-2 bg-white/20" />
-            <button onClick={handlePrint} className="p-1.5 rounded-md transition-colors hover:bg-white/10" title="Print / Save PDF">
+            <div className="hidden sm:block w-px h-4 mx-2 bg-white/20" />
+            <button onClick={handlePrint} className="hidden sm:inline-flex p-1.5 rounded-md transition-colors hover:bg-white/10" title="Print / Save PDF">
               <Printer size={15} style={{ color: "var(--color-parchment)" }} />
             </button>
-            <button onClick={handlePrint} className="p-1.5 rounded-md transition-colors hover:bg-white/10" title="Download">
+            <button onClick={handlePrint} className="hidden sm:inline-flex p-1.5 rounded-md transition-colors hover:bg-white/10" title="Download">
               <Download size={15} style={{ color: "var(--color-parchment)" }} />
-            </button>
-            <div className="w-px h-4 mx-2 bg-white/20" />
-            <button onClick={onClose} className="p-1.5 rounded-md transition-colors hover:bg-red-500/20" title="Close">
-              <X size={15} style={{ color: "var(--color-parchment)" }} />
             </button>
           </div>
         </div>

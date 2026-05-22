@@ -27,6 +27,8 @@ type Stream = {
   subtitle: string;
   image: string;
   imageAlt: string;
+  imageFit?: "cover" | "contain";
+  imagePosition?: string;
   Icon: LucideIcon;
   tone: string;
   facts: string[];
@@ -70,8 +72,9 @@ const STREAMS: Stream[] = [
     title: "Computer Science",
     subtitle:
       "A future-ready stream focused on computational thinking, programming logic, digital systems, and responsible use of technology.",
-    image: "/assets-images/gallery-8.jpg",
-    imageAlt: "Western Public Academy students participating in digital and academic activities",
+    image: "/assets-images/computer-lab-clean.jpg",
+    imageAlt: "Western Public Academy students learning in the computer lab",
+    imageFit: "contain",
     Icon: Laptop,
     tone: "Digital learning with analytical problem-solving",
     facts: ["Programming logic", "Digital literacy", "Project mindset", "IT pathways"],
@@ -96,8 +99,9 @@ const STREAMS: Stream[] = [
     title: "Sports Science",
     subtitle:
       "A stream for students interested in physical education, fitness, training science, sports leadership, and health-oriented careers.",
-    image: "/assets-images/sports-science.jpeg",
+    image: "/assets-images/gallery-10.jpg",
     imageAlt: "Sports Science learning and athletics at Western Public Academy",
+    imageFit: "contain",
     Icon: Trophy,
     tone: "Physical performance guided by scientific understanding",
     facts: ["Fitness science", "Sports leadership", "Event discipline", "Health awareness"],
@@ -122,8 +126,9 @@ const STREAMS: Stream[] = [
     title: "Education",
     subtitle:
       "A thoughtful stream for future educators, mentors, social leaders, and students who want to understand learning, children, and community development.",
-    image: "/assets-images/education-faculty.png",
+    image: "/assets-images/education-faculty-clean.jpg",
     imageAlt: "Education faculty and teaching-learning environment at Western Public Academy",
+    imageFit: "contain",
     Icon: GraduationCap,
     tone: "Teacher preparation with community responsibility",
     facts: ["Pedagogy", "Child psychology", "Communication", "Classroom practice"],
@@ -181,17 +186,19 @@ function getProgramSectionId(pathname = window.location.pathname, hash = window.
 function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }) {
   const Icon = stream.Icon;
   const isComputer = stream.id === "computer-science";
+  const imageFitClass = stream.imageFit === "contain" ? "object-contain p-2 sm:p-3" : "object-cover";
 
   return (
     <div
       className={`relative reveal lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}
       style={{ minHeight: 0 }}
     >
-      <div className="soft-frame soft-frame-lg group relative overflow-hidden" style={{ boxShadow: "0 32px 70px -42px rgba(15,61,46,0.45)" }}>
+      <div className="soft-frame soft-frame-lg group relative overflow-hidden" style={{ background: "linear-gradient(135deg, #071c24, #12372d)", boxShadow: "0 32px 70px -42px rgba(15,61,46,0.45)" }}>
         <img
           src={stream.image}
           alt={stream.imageAlt}
-          className="img-zoom w-full h-[260px] min-[420px]:h-[320px] sm:h-[420px] lg:h-[520px] object-cover"
+          className={`img-zoom w-full h-[260px] min-[420px]:h-[320px] sm:h-[420px] lg:h-[520px] ${imageFitClass}`}
+          style={{ objectPosition: stream.imagePosition ?? "center" }}
           loading="lazy"
           decoding="async"
         />

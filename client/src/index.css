@@ -312,6 +312,9 @@
   .pill-btn {
     border-radius: 9999px;
     transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background-color 220ms var(--ease-out);
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
   }
   .pill-btn:hover {
     transform: translateY(-2px);
@@ -323,6 +326,9 @@
   .ghost-btn {
     border-radius: 9999px;
     transition: transform 220ms var(--ease-out), background-color 220ms var(--ease-out), color 220ms var(--ease-out), border-color 220ms var(--ease-out);
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
   }
   .ghost-btn:hover { transform: translateY(-2px); }
 
@@ -573,11 +579,22 @@
   /* Device-wide responsive hardening added during continuation pass */
   *, *::before, *::after { box-sizing: border-box; }
   html, body, #root { min-width: 0; overflow-x: hidden; }
-  a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+    max-width: 100%;
+    min-width: 0;
+  }
   input, select, textarea { max-width: 100%; min-width: 0; }
   iframe, svg, video, canvas { max-width: 100%; }
   section { overflow-wrap: anywhere; }
   .container > *, .editorial-card, .soft-frame { min-width: 0; }
+  .pill-btn, .ghost-btn, .press, .editorial-card {
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  .pill-btn svg, .ghost-btn svg, button svg, a svg {
+    flex: 0 0 auto;
+  }
 
   @media (max-width: 639px) {
     .container {
@@ -594,13 +611,47 @@
     .gold-rule::before { width: 1.65rem; flex: 0 0 auto; }
     .editorial-card:hover { transform: none; }
     .marquee-track { gap: 1.5rem; padding-right: 1.5rem; }
-    .pill-btn, .ghost-btn { min-height: 44px; }
+    .pill-btn, .ghost-btn {
+      min-height: 44px;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      letter-spacing: 0.08em !important;
+      line-height: 1.25;
+      white-space: normal !important;
+    }
+    .pill-btn.inline-flex, .ghost-btn.inline-flex {
+      gap: 0.55rem;
+      justify-content: center;
+    }
+    .container .uppercase {
+      letter-spacing: 0.08em !important;
+    }
+    .container [class*="tracking-"] {
+      letter-spacing: 0.08em !important;
+    }
+    .rounded-full {
+      max-width: 100%;
+    }
+    .group:hover .img-zoom,
+    .img-zoom:hover {
+      transform: none;
+    }
+    .soft-frame,
+    .editorial-card {
+      border-radius: 14px;
+    }
   }
 
   @media (max-width: 359px) {
     .container { padding-left: 0.75rem; padding-right: 0.75rem; }
     .display-serif { letter-spacing: -0.018em; }
     .gold-rule { font-size: 0.64rem; letter-spacing: 0.12em; }
+    .pill-btn, .ghost-btn {
+      font-size: 0.72rem !important;
+      letter-spacing: 0.06em !important;
+      padding-left: 0.875rem !important;
+      padding-right: 0.875rem !important;
+    }
   }
 
 

@@ -209,7 +209,7 @@ function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }
             <div className="absolute top-0 left-0 h-28 w-px bg-cyan-200/70" />
             <div className="absolute bottom-0 right-0 h-px w-32 bg-cyan-200/70" />
             <div className="absolute bottom-0 right-0 h-32 w-px bg-cyan-200/70" />
-            <div className="absolute right-6 top-8 rounded-full border border-cyan-100/45 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-cyan-50 backdrop-blur-sm">
+            <div className="absolute right-2 top-6 max-w-[calc(100%-1rem)] rounded-full border border-cyan-100/45 px-3 py-1 text-[9px] uppercase tracking-[0.12em] text-cyan-50 backdrop-blur-sm sm:right-6 sm:top-8 sm:text-[10px] sm:tracking-[0.25em]">
               Logic · Code · Create
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function Programs() {
           <div className="container relative z-10 pt-12 sm:pt-16 pb-16 sm:pb-20 lg:pt-24 lg:pb-24">
             <div className="max-w-5xl reveal">
               <div className="gold-rule mb-6" style={{ color: "var(--color-brass)" }}>Academic Programs</div>
-              <div className="flex flex-wrap gap-2 mb-6 max-w-full">
+              <div className="flex flex-wrap justify-center gap-2 mb-6 max-w-full sm:justify-start">
                 {STREAMS.map((s) => (
                   <button
                     key={s.id}
@@ -369,7 +369,7 @@ export default function Programs() {
                     </div>
                     <div className="mt-6 flex flex-wrap gap-2">
                       {stream.pathways.map((path) => (
-                        <span key={path} className="rounded-full px-3.5 py-2 text-[12px]" style={{ background: "#fff", border: "1px solid var(--color-parchment-deep)", color: "var(--color-forest-deep)" }}>
+                        <span key={path} className="rounded-full px-3.5 py-2 text-[11.5px] leading-snug sm:text-[12px]" style={{ background: "#fff", border: "1px solid var(--color-parchment-deep)", color: "var(--color-forest-deep)" }}>
                           {path}
                         </span>
                       ))}

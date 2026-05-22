@@ -295,7 +295,7 @@ function Hero() {
           {/* Right: floating editorial card */}
           <div className="col-span-12 lg:col-span-4">
             <div
-              className="ml-auto mt-10 lg:mt-0 max-w-sm relative"
+              className="mx-auto mt-10 max-w-sm relative lg:ml-auto lg:mr-0 lg:mt-0"
               style={{ animation: "floatIn 800ms var(--ease-out)" }}
             >
               <div
@@ -656,9 +656,9 @@ function Programs() {
                     {p.desc}
                   </p>
                 </div>
-                <div className="shrink-0 flex items-center gap-3 md:gap-4">
+                <div className="flex shrink-0 flex-wrap items-center gap-3 md:gap-4">
                   <span
-                    className="text-[10.5px] sm:text-[11px] uppercase whitespace-nowrap"
+                    className="text-[10.5px] sm:text-[11px] uppercase"
                     style={{
                       color: "var(--color-brass-deep)",
                       letterSpacing: "0.22em",
@@ -1024,8 +1024,8 @@ function CTA() {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10 reveal flex lg:flex-col gap-6 lg:gap-3 lg:items-end lg:justify-end">
-            <div className="text-right">
+          <div className="col-span-12 lg:col-span-3 lg:col-start-10 reveal flex flex-col gap-6 lg:gap-3 lg:items-end lg:justify-end">
+            <div className="text-left lg:text-right">
               <div className="eyebrow" style={{ color: "var(--color-brass)" }}>
                 Visit Us
               </div>

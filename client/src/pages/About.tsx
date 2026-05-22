@@ -37,8 +37,9 @@ const ASSETS = {
   administrator: "/assets-images/assistant-administrator-bhoj-singh-rawal.jpg",
   accountant: "/assets-images/tulsi-chand-accountant.jpg",
   hotel: "/assets-images/hotel-management.png",
-  education: "/assets-images/education-faculty.png",
-  sports: "/assets-images/sports-science.jpeg",
+  computer: "/assets-images/computer-lab-clean.jpg",
+  education: "/assets-images/education-faculty-clean.jpg",
+  sports: "/assets-images/gallery-10.jpg",
   gallery1: "/assets-images/gallery-1.jpg",
   gallery2: "/assets-images/gallery-2.jpg",
   gallery3: "/assets-images/gallery-3.jpg",
@@ -99,6 +100,7 @@ const CAMPUS_MOMENTS = [
 
 const PROGRAM_SNAPSHOTS = [
   { title: "Hotel Management", img: ASSETS.hotel, desc: "Practical hospitality exposure for service, kitchen, and front-office confidence." },
+  { title: "Computer Science", img: ASSETS.computer, desc: "Digital literacy, coding logic, and project-minded learning in a lab environment." },
   { title: "Sports Science", img: ASSETS.sports, desc: "Physical education, performance, teamwork, and disciplined athletic growth." },
   { title: "Education", img: ASSETS.education, desc: "A teaching-focused stream for students drawn toward classrooms and community service." },
 ];
@@ -398,11 +400,11 @@ function ProgramAndCampusLife() {
               Streams and experiences placed in the same school journey.
             </h2>
           </div>
-          <div className="col-span-12 lg:col-span-7 reveal grid sm:grid-cols-3 gap-4">
+          <div className="col-span-12 lg:col-span-7 reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PROGRAM_SNAPSHOTS.map((item) => (
               <article key={item.title} className="overflow-hidden group" style={{ borderRadius: 16, border: "1px solid var(--color-parchment-deep)", background: "var(--color-parchment)" }}>
-                <div className="h-[170px] overflow-hidden">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover img-zoom" />
+                <div className="h-[170px] overflow-hidden" style={{ background: "linear-gradient(135deg, #071c24, #12372d)" }}>
+                  <img src={item.img} alt={item.title} className="w-full h-full object-contain img-zoom" />
                 </div>
                 <div className="p-5">
                   <h3 className="display-serif text-[22px]" style={{ color: "var(--color-forest-deep)" }}>{item.title}</h3>

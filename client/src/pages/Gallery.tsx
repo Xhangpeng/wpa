@@ -40,7 +40,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   { id: "campus-07", title: "Student Moment", category: "campus", categoryLabel: "Campus", src: asset("gallery-7.jpg"), alt: "Student moment at Western Public Academy" },
   { id: "campus-08", title: "Future Ready", category: "campus", categoryLabel: "Campus", src: asset("gallery-8.jpg"), alt: "Future-ready student learning at Western Public Academy" },
   { id: "events-01", title: "School Event", category: "events", categoryLabel: "Events", src: asset("gallery-9.jpg"), alt: "School event at Western Public Academy" },
-  { id: "campus-09", title: "Campus Detail", category: "campus", categoryLabel: "Campus", src: asset("gallery-10.jpg"), alt: "Campus detail at Western Public Academy" },
+  { id: "events-05", title: "Sports Achievement", category: "events", categoryLabel: "Events", src: asset("gallery-10.jpg"), alt: "Sports achievement at Western Public Academy" },
   { id: "campus-10", title: "Friends & Focus", category: "campus", categoryLabel: "Campus", src: asset("gal-11.jpg"), alt: "Students at Western Public Academy" },
   { id: "campus-11", title: "Bright Faces", category: "campus", categoryLabel: "Campus", src: asset("gal-12.jpg"), alt: "Western Public Academy student group" },
   { id: "campus-12", title: "Learning Circle", category: "campus", categoryLabel: "Campus", src: asset("gal-13.jpg"), alt: "Learning circle at Western Public Academy" },
@@ -66,8 +66,9 @@ const GALLERY_ITEMS: GalleryItem[] = [
   { id: "campus-30", title: "Learning Environment", category: "campus", categoryLabel: "Campus", src: asset("background-img-3.jpg"), alt: "Learning environment at Western Public Academy" },
   { id: "campus-31", title: "School Setting", category: "campus", categoryLabel: "Campus", src: asset("background-img-4.jpg"), alt: "Western Public Academy school setting" },
   { id: "campus-32", title: "Cover Moment", category: "campus", categoryLabel: "Campus", src: asset("home-down-cover-photo.jpg"), alt: "Western Public Academy cover moment" },
-  { id: "program-02", title: "Education", category: "programs", categoryLabel: "Learning", src: asset("education-faculty.png"), alt: "Education faculty learning pathway" },
-  { id: "program-03", title: "Sports Science", category: "programs", categoryLabel: "Learning", src: asset("sports-science.jpeg"), alt: "Sports Science learning pathway" },
+  { id: "program-02", title: "Computer Science", category: "programs", categoryLabel: "Learning", src: asset("computer-lab-clean.jpg"), alt: "Computer Science lab learning pathway" },
+  { id: "program-03", title: "Sports Science", category: "programs", categoryLabel: "Learning", src: asset("gallery-10.jpg"), alt: "Sports Science learning pathway" },
+  { id: "program-04", title: "Education", category: "programs", categoryLabel: "Learning", src: asset("education-faculty-clean.jpg"), alt: "Education faculty learning pathway" },
   { id: "recreation-02", title: "Outdoor Trip", category: "recreation", categoryLabel: "Trips", src: asset("boating-picnic.jpg"), alt: "Outdoor boating picnic at Western Public Academy" },
   { id: "recreation-03", title: "Teacher Picnic", category: "recreation", categoryLabel: "Trips", src: asset("teacher-picnic.jpg"), alt: "Teacher picnic at Western Public Academy" },
   { id: "community-01", title: "School Team", category: "community", categoryLabel: "Community", src: asset("school-heads.jpg"), alt: "Western Public Academy school leadership and team" },
@@ -98,6 +99,7 @@ function getCategoryCount(id: CategoryId) {
 
 function GalleryTile({ item, index, onSelect }: { item: GalleryItem; index: number; onSelect: (item: GalleryItem) => void }) {
   const height = TILE_HEIGHTS[index % TILE_HEIGHTS.length];
+  const isProgramImage = item.category === "programs";
 
   return (
     <button
@@ -115,10 +117,10 @@ function GalleryTile({ item, index, onSelect }: { item: GalleryItem; index: numb
       <img
         src={item.src}
         alt={item.alt}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        className={`absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 ${isProgramImage ? "object-contain" : "object-cover"}`}
         loading={index < INITIAL_VISIBLE_COUNT ? "eager" : "lazy"}
         decoding="async"
-        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+        style={{ height: "100%", width: "100%", objectFit: isProgramImage ? "contain" : "cover" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(6,32,24,0.9)] via-[rgba(6,32,24,0.08)] to-transparent opacity-85 transition-opacity duration-300 group-hover:opacity-95" />
       <div className="absolute left-3 top-3 rounded-full px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em]" style={{ background: "rgba(247,241,229,0.95)", color: "var(--color-forest-deep)" }}>

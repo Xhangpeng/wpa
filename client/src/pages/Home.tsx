@@ -48,6 +48,7 @@ const PROGRAMS = [
     title: "Hotel Management",
     desc: "An applied program that blends classroom theory with kitchen, front-office, and service practice — opening doors across Nepal's growing tourism economy.",
     img: "/assets-images/hotel-management.png",
+    imageFit: "cover",
     icon: Hotel,
     href: "/programs/hotel-management",
   },
@@ -56,7 +57,8 @@ const PROGRAMS = [
     eyebrow: "Computing",
     title: "Computer Science",
     desc: "Programming, digital systems, and computational thinking — equipping students for engineering, software, and data-driven futures.",
-    img: "/assets-images/gallery-2.jpg",
+    img: "/assets-images/computer-lab-clean.jpg",
+    imageFit: "contain",
     icon: Laptop,
     href: "/programs/computer-science",
   },
@@ -65,7 +67,8 @@ const PROGRAMS = [
     eyebrow: "Athletics & Health",
     title: "Sports Science",
     desc: "Human performance, kinesiology, and athletic training — for students passionate about sport, fitness, and physical education leadership.",
-    img: "/assets-images/sports-science.jpeg",
+    img: "/assets-images/gallery-10.jpg",
+    imageFit: "contain",
     icon: Trophy,
     href: "/programs/sports-science",
   },
@@ -74,7 +77,8 @@ const PROGRAMS = [
     eyebrow: "Pedagogy",
     title: "Education",
     desc: "A reflective track for future teachers — child psychology, curriculum, and classroom practice rooted in Nepali educational realities.",
-    img: "/assets-images/education-faculty.png",
+    img: "/assets-images/education-faculty-clean.jpg",
+    imageFit: "contain",
     icon: BookOpen,
     href: "/programs/education",
   },
@@ -612,12 +616,12 @@ function Programs() {
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
               }}
             >
-              <div className="col-span-12 md:col-span-4 lg:col-span-3 relative overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[220px]">
+              <div className="col-span-12 md:col-span-4 lg:col-span-3 relative overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[220px]" style={{ background: "linear-gradient(135deg, #071c24, #12372d)" }}>
                 <img
                   src={p.img}
                   alt={p.title}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover img-zoom"
+                  className={`absolute inset-0 w-full h-full img-zoom ${p.imageFit === "contain" ? "object-contain" : "object-cover"}`}
                 />
                 <div
                   className="absolute inset-0"

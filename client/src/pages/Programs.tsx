@@ -186,7 +186,7 @@ function getProgramSectionId(pathname = window.location.pathname, hash = window.
 function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }) {
   const Icon = stream.Icon;
   const isComputer = stream.id === "computer-science";
-  const imageFitClass = stream.imageFit === "contain" ? "object-contain p-2 sm:p-3" : "object-cover";
+  const imageFitClass = stream.imageFit === "contain" ? "object-contain" : "object-cover";
 
   return (
     <div
@@ -197,7 +197,7 @@ function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }
         <img
           src={stream.image}
           alt={stream.imageAlt}
-          className={`img-zoom w-full h-[260px] min-[420px]:h-[320px] sm:h-[420px] lg:h-[520px] ${imageFitClass}`}
+          className={`img-zoom w-full h-[240px] min-[420px]:h-[300px] sm:h-[360px] lg:h-[420px] ${imageFitClass}`}
           style={{ objectPosition: stream.imagePosition ?? "center" }}
           loading="lazy"
           decoding="async"

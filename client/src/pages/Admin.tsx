@@ -257,19 +257,19 @@ function SignInView({ onCodeAccepted }: { onCodeAccepted: () => void }) {
 
   return (
     <div className="min-h-screen overflow-hidden" style={{ background: "var(--color-forest-deep)" }}>
-      <div className="container grid min-h-screen items-center py-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-6">
-          <div className="gold-rule" style={{ color: "var(--color-brass)" }}>Western Admin</div>
-          <h1 className="display-serif mt-5 text-[clamp(3rem,8vw,7rem)] leading-none" style={{ color: "var(--color-parchment)" }}>
+      <div className="container grid min-h-screen items-center justify-items-center py-8 sm:py-10 lg:grid-cols-12 lg:justify-items-stretch lg:gap-12">
+        <div className="w-full max-w-[620px] text-center lg:col-span-6 lg:text-left">
+          <div className="gold-rule justify-center lg:justify-start" style={{ color: "var(--color-brass)" }}>Western Admin</div>
+          <h1 className="display-serif mx-auto mt-5 max-w-[11ch] text-[clamp(2.7rem,13vw,7rem)] leading-none lg:mx-0" style={{ color: "var(--color-parchment)" }}>
             Private content desk.
           </h1>
-          <p className="mt-6 max-w-xl text-[18px] leading-relaxed" style={{ color: "rgba(247,241,229,0.78)" }}>
+          <p className="mx-auto mt-6 max-w-xl text-[16px] leading-relaxed sm:text-[18px] lg:mx-0" style={{ color: "rgba(247,241,229,0.78)" }}>
             Sign in with the authorized Google account to manage gallery images and school notices.
           </p>
         </div>
 
-        <div className="mt-10 lg:col-span-5 lg:col-start-8 lg:mt-0">
-          <div className="rounded-3xl border p-6 sm:p-8" style={{ background: "var(--color-parchment)", borderColor: "rgba(201,161,74,0.35)", boxShadow: "0 40px 90px -46px rgba(0,0,0,0.75)" }}>
+        <div className="mt-8 w-full max-w-[520px] lg:col-span-5 lg:col-start-8 lg:mt-0">
+          <div className="rounded-[24px] border p-5 sm:rounded-3xl sm:p-8" style={{ background: "var(--color-parchment)", borderColor: "rgba(201,161,74,0.35)", boxShadow: "0 40px 90px -46px rgba(0,0,0,0.75)" }}>
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl" style={{ background: "var(--color-brass)", color: "var(--color-forest-deep)" }}>
               <LayoutDashboard size={23} />
             </div>

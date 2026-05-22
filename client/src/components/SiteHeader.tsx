@@ -120,7 +120,7 @@ export default function SiteHeader() {
           {/* Logo + wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 sm:gap-3 lg:gap-3.5 group shrink-0"
+            className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3 lg:flex-none lg:gap-3.5 group"
           >
             <div
               className="relative shrink-0 overflow-hidden transition-transform duration-300 group-hover:rotate-[6deg]"
@@ -142,18 +142,18 @@ export default function SiteHeader() {
                 decoding="async"
               />
             </div>
-            <div className="leading-tight">
+            <div className="min-w-0 leading-tight">
               <div
-                className="display-serif text-[13.5px] min-[360px]:text-[15px] sm:text-[17px] lg:text-[20px] xl:text-[22px] whitespace-nowrap"
+                className="display-serif truncate text-[13px] min-[360px]:text-[14.5px] sm:text-[17px] lg:text-[20px] xl:text-[22px] whitespace-nowrap"
                 style={{ color: "var(--color-forest-deep)" }}
               >
                 Western Public Academy
               </div>
               <div
-                className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[9.5px] lg:text-[10.5px] uppercase mt-0.5 whitespace-nowrap"
+                className="hidden min-[380px]:block truncate text-[7.5px] sm:text-[9.5px] lg:text-[10.5px] uppercase mt-0.5 whitespace-nowrap"
                 style={{
                   color: "var(--color-brass-deep)",
-                  letterSpacing: "0.22em",
+                  letterSpacing: "0.16em",
                   fontWeight: 600,
                 }}
               >

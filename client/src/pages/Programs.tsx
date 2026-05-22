@@ -15,6 +15,7 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
+import { useLocation } from "wouter";
 
 const HERO_IMAGE = "/assets-images/background-img-3.jpg";
 
@@ -165,14 +166,16 @@ const LEARNING_MODEL = [
   },
 ];
 
-function scrollToHash() {
-  const { hash, pathname } = window.location;
-  const slug = pathname.startsWith("/programs/") ? pathname.split("/").filter(Boolean).at(-1) : "";
-  const id = hash ? hash.replace("#", "") : slug;
+function scrollToSection(id: string, behavior: ScrollBehavior = "smooth") {
   if (!id) return;
   window.setTimeout(() => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById(id)?.scrollIntoView({ behavior, block: "start" });
   }, 120);
+}
+
+function getProgramSectionId(pathname = window.location.pathname, hash = window.location.hash) {
+  const slug = pathname.startsWith("/programs/") ? (pathname.split("/").filter(Boolean).at(-1) ?? "") : "";
+  return hash ? hash.replace("#", "") : slug;
 }
 
 function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }) {
@@ -222,11 +225,22 @@ function ProgramMedia({ stream, reverse }: { stream: Stream; reverse?: boolean }
 
 export default function Programs() {
   useReveal();
+  const [location, setLocation] = useLocation();
+
+  const navigateToSection = (id: string) => {
+    window.history.replaceState(null, "", `/programs/${id}`);
+    setLocation(`/programs/${id}`);
+    scrollToSection(id);
+  };
 
   useEffect(() => {
-    scrollToHash();
-    window.addEventListener("hashchange", scrollToHash);
-    return () => window.removeEventListener("hashchange", scrollToHash);
+    scrollToSection(getProgramSectionId(), "auto");
+  }, [location]);
+
+  useEffect(() => {
+    const onHashChange = () => scrollToSection(getProgramSectionId());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
   return (
@@ -245,14 +259,15 @@ export default function Programs() {
               <div className="gold-rule mb-6" style={{ color: "var(--color-brass)" }}>Academic Programs</div>
               <div className="flex flex-wrap gap-2 mb-6 max-w-full">
                 {STREAMS.map((s) => (
-                  <a
+                  <button
                     key={s.id}
-                    href={`#${s.id}`}
+                    type="button"
+                    onClick={() => navigateToSection(s.id)}
                     className="rounded-full px-3 sm:px-4 py-2 text-[10px] sm:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.16em] transition-all duration-300"
                     style={{ border: "1px solid rgba(201,161,74,0.45)", color: "var(--color-parchment)", background: "rgba(247,241,229,0.08)" }}
                   >
                     {s.title}
-                  </a>
+                  </button>
                 ))}
               </div>
               <h1 className="display-serif text-[clamp(2.7rem,13vw,8.9rem)] leading-[0.96] sm:leading-[0.94]" style={{ color: "var(--color-parchment)" }}>
@@ -262,12 +277,12 @@ export default function Programs() {
                 Western Public Academy offers focused +2 pathways where classroom discipline, practical learning, mentorship, and career imagination work together. Each stream is presented with the same care students experience on campus: guided, purposeful, and connected to life beyond school.
               </p>
               <div className="mt-9 flex flex-col sm:flex-row gap-3">
-                <a href="#streams" className="pill-btn inline-flex items-center justify-center gap-2 px-6 py-3 text-[12px] font-semibold uppercase" style={{ background: "var(--color-brass)", color: "var(--color-forest-deep)", letterSpacing: "0.16em" }}>
+                <button type="button" onClick={() => scrollToSection("streams")} className="pill-btn inline-flex items-center justify-center gap-2 px-6 py-3 text-[12px] font-semibold uppercase" style={{ background: "var(--color-brass)", color: "var(--color-forest-deep)", letterSpacing: "0.16em" }}>
                   Explore Streams <ArrowRight size={15} />
-                </a>
-                <a href="#learning-model" className="pill-btn inline-flex items-center justify-center gap-2 px-6 py-3 text-[12px] font-semibold uppercase" style={{ border: "1px solid rgba(247,241,229,0.45)", color: "var(--color-parchment)", letterSpacing: "0.16em" }}>
+                </button>
+                <button type="button" onClick={() => scrollToSection("learning-model")} className="pill-btn inline-flex items-center justify-center gap-2 px-6 py-3 text-[12px] font-semibold uppercase" style={{ border: "1px solid rgba(247,241,229,0.45)", color: "var(--color-parchment)", letterSpacing: "0.16em" }}>
                   Learning Model <Sparkles size={15} />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -291,7 +306,7 @@ export default function Programs() {
               {STREAMS.map((stream) => {
                 const Icon = stream.Icon;
                 return (
-                  <a key={stream.id} href={`#${stream.id}`} className="editorial-card reveal group p-5 min-h-[230px] flex flex-col justify-between">
+                  <button key={stream.id} type="button" onClick={() => navigateToSection(stream.id)} className="editorial-card reveal group p-5 min-h-[230px] flex flex-col justify-between text-left">
                     <div>
                       <div className="flex items-center justify-between mb-8">
                         <span className="text-[12px] font-semibold" style={{ color: "var(--color-brass-deep)", letterSpacing: "0.18em" }}>{stream.number}</span>
@@ -305,7 +320,7 @@ export default function Programs() {
                     <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase font-semibold" style={{ color: "var(--color-brass-deep)", letterSpacing: "0.16em" }}>
                       View focus <ArrowRight size={13} />
                     </span>
-                  </a>
+                  </button>
                 );
               })}
             </div>

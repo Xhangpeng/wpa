@@ -33,7 +33,7 @@ function ApplyHero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-2.jpg)",
+          backgroundImage: "url(/assets-images/background-img-2.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

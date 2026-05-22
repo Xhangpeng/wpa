@@ -25,7 +25,7 @@ function ContactHero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-3.jpg)",
+          backgroundImage: "url(/assets-images/background-img-3.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -265,7 +265,7 @@ function ContactForm() {
               }}
             >
               <img
-                src="/IMAGES/BACKGROUND-IMG-2.jpg"
+                src="/assets-images/background-img-2.jpg"
                 alt="Campus"
                 className="w-full h-full object-cover img-zoom"
                 loading="lazy"
@@ -434,7 +434,7 @@ function MapSection() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-2.jpg)",
+          backgroundImage: "url(/assets-images/background-img-2.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

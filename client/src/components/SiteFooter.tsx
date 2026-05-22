@@ -7,7 +7,7 @@
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
-const LOGO = "/IMAGES/SCHOOL%27S%20LOGO.jpg";
+const LOGO = "/assets-images/school-logo.jpg";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },

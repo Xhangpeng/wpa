@@ -16,17 +16,7 @@ type GalleryItem = {
   featured?: boolean;
 };
 
-const FILE_ALIASES: Record<string, string> = {
-  "BACKGROUNDIMG4.jpg": "BACKGROUND IMG 4.jpg",
-  "boating-picnic.jpg": "boating + picnic.jpg",
-  "principal.jpg": "principal bibek raj kalouni.jpg",
-  "vice-principal.jpg": "vice-principal mahesh chaudhary.jpg",
-  "administrator.jpg": "asst. adiministrator bhoj singh rawal.jpg",
-  "accountant.jpg": "tulsi chand accountant.jpg",
-  "school-logo.jpg": "SCHOOL'S LOGO.jpg",
-};
-
-const asset = (name: string) => `/IMAGES/${encodeURIComponent(FILE_ALIASES[name] ?? name)}`;
+const asset = (name: string) => `/assets-images/${name}`;
 
 const CATEGORIES: { id: CategoryId; label: string }[] = [
   { id: "all", label: "All" },
@@ -39,7 +29,7 @@ const CATEGORIES: { id: CategoryId; label: string }[] = [
 
 const GALLERY_ITEMS: GalleryItem[] = [
   { id: "campus-01", title: "Morning Assembly", category: "campus", categoryLabel: "Campus", src: asset("gallery-1.jpg"), alt: "Western Public Academy students gathered on campus", featured: true },
-  { id: "program-01", title: "Hotel Management", category: "programs", categoryLabel: "Learning", src: asset("HOTEL-MANAGEMENT.png"), alt: "Hotel Management practical learning at Western Public Academy", featured: true },
+  { id: "program-01", title: "Hotel Management", category: "programs", categoryLabel: "Learning", src: asset("hotel-management.png"), alt: "Hotel Management practical learning at Western Public Academy", featured: true },
   { id: "recreation-01", title: "Picnic Memories", category: "recreation", categoryLabel: "Trips", src: asset("picnic-gallery.jpg"), alt: "Western Public Academy picnic memory", featured: true },
   { id: "events-02", title: "Creative Participation", category: "events", categoryLabel: "Events", src: asset("gal-22.jpg"), alt: "Student creative participation at Western Public Academy", featured: true },
   { id: "campus-02", title: "Student Life", category: "campus", categoryLabel: "Campus", src: asset("gallery-2.jpg"), alt: "Western Public Academy students in daily school life" },
@@ -71,20 +61,20 @@ const GALLERY_ITEMS: GalleryItem[] = [
   { id: "campus-25", title: "Campus Family", category: "campus", categoryLabel: "Campus", src: asset("gal-29.jpg"), alt: "Campus family at Western Public Academy" },
   { id: "campus-26", title: "Inspiring Place", category: "campus", categoryLabel: "Campus", src: asset("gal-30.jpg"), alt: "Inspiring school place at Western Public Academy" },
   { id: "campus-27", title: "School Memory", category: "campus", categoryLabel: "Campus", src: asset("gall-12.jpg"), alt: "School memory at Western Public Academy" },
-  { id: "campus-28", title: "Western Public", category: "campus", categoryLabel: "Campus", src: asset("BACKGROUND-IMG-1.jpg"), alt: "Western Public Academy campus atmosphere" },
-  { id: "campus-29", title: "Campus View", category: "campus", categoryLabel: "Campus", src: asset("BACKGROUND-IMG-2.jpg"), alt: "Western Public Academy campus view" },
-  { id: "campus-30", title: "Learning Environment", category: "campus", categoryLabel: "Campus", src: asset("BACKGROUND-IMG-3.jpg"), alt: "Learning environment at Western Public Academy" },
-  { id: "campus-31", title: "School Setting", category: "campus", categoryLabel: "Campus", src: asset("BACKGROUNDIMG4.jpg"), alt: "Western Public Academy school setting" },
+  { id: "campus-28", title: "Western Public", category: "campus", categoryLabel: "Campus", src: asset("background-img-1.jpg"), alt: "Western Public Academy campus atmosphere" },
+  { id: "campus-29", title: "Campus View", category: "campus", categoryLabel: "Campus", src: asset("background-img-2.jpg"), alt: "Western Public Academy campus view" },
+  { id: "campus-30", title: "Learning Environment", category: "campus", categoryLabel: "Campus", src: asset("background-img-3.jpg"), alt: "Learning environment at Western Public Academy" },
+  { id: "campus-31", title: "School Setting", category: "campus", categoryLabel: "Campus", src: asset("background-img-4.jpg"), alt: "Western Public Academy school setting" },
   { id: "campus-32", title: "Cover Moment", category: "campus", categoryLabel: "Campus", src: asset("home-down-cover-photo.jpg"), alt: "Western Public Academy cover moment" },
   { id: "program-02", title: "Education", category: "programs", categoryLabel: "Learning", src: asset("education-faculty.png"), alt: "Education faculty learning pathway" },
   { id: "program-03", title: "Sports Science", category: "programs", categoryLabel: "Learning", src: asset("sports-science.jpeg"), alt: "Sports Science learning pathway" },
   { id: "recreation-02", title: "Outdoor Trip", category: "recreation", categoryLabel: "Trips", src: asset("boating-picnic.jpg"), alt: "Outdoor boating picnic at Western Public Academy" },
   { id: "recreation-03", title: "Teacher Picnic", category: "recreation", categoryLabel: "Trips", src: asset("teacher-picnic.jpg"), alt: "Teacher picnic at Western Public Academy" },
   { id: "community-01", title: "School Team", category: "community", categoryLabel: "Community", src: asset("school-heads.jpg"), alt: "Western Public Academy school leadership and team" },
-  { id: "community-02", title: "Bibek Raj Kalouni", category: "community", categoryLabel: "Principal", src: asset("principal.jpg"), alt: "Bibek Raj Kalouni, Principal of Western Public Academy" },
-  { id: "community-03", title: "Mahesh Chaudhary", category: "community", categoryLabel: "Vice Principal", src: asset("vice-principal.jpg"), alt: "Mahesh Chaudhary, Vice Principal of Western Public Academy" },
-  { id: "community-04", title: "Bhoj Singh Rawal", category: "community", categoryLabel: "Asst. Administrator", src: asset("administrator.jpg"), alt: "Bhoj Singh Rawal, Assistant Administrator of Western Public Academy" },
-  { id: "community-05", title: "Tulsi Chand", category: "community", categoryLabel: "Accountant", src: asset("accountant.jpg"), alt: "Tulsi Chand, Accountant of Western Public Academy" },
+  { id: "community-02", title: "Bibek Raj Kalouni", category: "community", categoryLabel: "Principal", src: asset("principal-bibek-raj-kalouni.jpg"), alt: "Bibek Raj Kalouni, Principal of Western Public Academy" },
+  { id: "community-03", title: "Mahesh Chaudhary", category: "community", categoryLabel: "Vice Principal", src: asset("vice-principal-mahesh-chaudhary.jpg"), alt: "Mahesh Chaudhary, Vice Principal of Western Public Academy" },
+  { id: "community-04", title: "Bhoj Singh Rawal", category: "community", categoryLabel: "Asst. Administrator", src: asset("assistant-administrator-bhoj-singh-rawal.jpg"), alt: "Bhoj Singh Rawal, Assistant Administrator of Western Public Academy" },
+  { id: "community-05", title: "Tulsi Chand", category: "community", categoryLabel: "Accountant", src: asset("tulsi-chand-accountant.jpg"), alt: "Tulsi Chand, Accountant of Western Public Academy" },
 ];
 
 const INITIAL_VISIBLE_COUNT = 24;

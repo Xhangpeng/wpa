@@ -397,7 +397,7 @@ function NoticesHero() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-2.jpg)",
+          backgroundImage: "url(/assets-images/background-img-2.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -892,7 +892,7 @@ function QuickContact() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-3.jpg)",
+          backgroundImage: "url(/assets-images/background-img-3.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

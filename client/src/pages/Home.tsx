@@ -35,10 +35,10 @@ import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
 
 const HERO_BGS = [
-  "/IMAGES/BACKGROUND-IMG-1.jpg",
-  "/IMAGES/BACKGROUND-IMG-2.jpg",
-  "/IMAGES/BACKGROUND-IMG-3.jpg",
-  "/IMAGES/BACKGROUND%20IMG%204.jpg",
+  "/assets-images/background-img-1.jpg",
+  "/assets-images/background-img-2.jpg",
+  "/assets-images/background-img-3.jpg",
+  "/assets-images/background-img-4.jpg",
 ];
 
 const PROGRAMS = [
@@ -47,7 +47,7 @@ const PROGRAMS = [
     eyebrow: "Hospitality",
     title: "Hotel Management",
     desc: "An applied program that blends classroom theory with kitchen, front-office, and service practice — opening doors across Nepal's growing tourism economy.",
-    img: "/IMAGES/HOTEL-MANAGEMENT.png",
+    img: "/assets-images/hotel-management.png",
     icon: Hotel,
     href: "/programs/hotel-management",
   },
@@ -56,7 +56,7 @@ const PROGRAMS = [
     eyebrow: "Computing",
     title: "Computer Science",
     desc: "Programming, digital systems, and computational thinking — equipping students for engineering, software, and data-driven futures.",
-    img: "/IMAGES/gallery-2.jpg",
+    img: "/assets-images/gallery-2.jpg",
     icon: Laptop,
     href: "/programs/computer-science",
   },
@@ -65,7 +65,7 @@ const PROGRAMS = [
     eyebrow: "Athletics & Health",
     title: "Sports Science",
     desc: "Human performance, kinesiology, and athletic training — for students passionate about sport, fitness, and physical education leadership.",
-    img: "/IMAGES/sports-science.jpeg",
+    img: "/assets-images/sports-science.jpeg",
     icon: Trophy,
     href: "/programs/sports-science",
   },
@@ -74,7 +74,7 @@ const PROGRAMS = [
     eyebrow: "Pedagogy",
     title: "Education",
     desc: "A reflective track for future teachers — child psychology, curriculum, and classroom practice rooted in Nepali educational realities.",
-    img: "/IMAGES/education-faculty.png",
+    img: "/assets-images/education-faculty.png",
     icon: BookOpen,
     href: "/programs/education",
   },
@@ -121,44 +121,44 @@ const STATS = [
 ];
 
 const GALLERY = [
-  "/IMAGES/gallery-1.jpg",       // 0 - 4x2 hero (people in lawn)
-  "/IMAGES/gallery-5.jpg",       // 1 - 2x1
-  "/IMAGES/gal-13.jpg",          // 2 - 2x1
-  "/IMAGES/picnic-gallery.jpg",  // 3 - 2x2 vertical
-  "/IMAGES/gallery-9.jpg",       // 4 - 2x2 vertical
-  "/IMAGES/gal-22.jpg",          // 5 - 2x1
-  "/IMAGES/gal-17.jpg",          // 6 - 2x1
-  "/IMAGES/teacher-picnic.jpg",  // 7 - 2x1
-  "/IMAGES/boating%20%2B%20picnic.jpg",  // 8 - 2x1
-  "/IMAGES/home-down-cover-photo.jpg", // 9 - 4x1 wide finale
+  "/assets-images/gallery-1.jpg",       // 0 - 4x2 hero (people in lawn)
+  "/assets-images/gallery-5.jpg",       // 1 - 2x1
+  "/assets-images/gal-13.jpg",          // 2 - 2x1
+  "/assets-images/picnic-gallery.jpg",  // 3 - 2x2 vertical
+  "/assets-images/gallery-9.jpg",       // 4 - 2x2 vertical
+  "/assets-images/gal-22.jpg",          // 5 - 2x1
+  "/assets-images/gal-17.jpg",          // 6 - 2x1
+  "/assets-images/teacher-picnic.jpg",  // 7 - 2x1
+  "/assets-images/boating-picnic.jpg",  // 8 - 2x1
+  "/assets-images/home-down-cover-photo.jpg", // 9 - 4x1 wide finale
 ];
 
 const HEADS = [
   {
     name: "Bibek Raj Kalouni",
     role: "Principal",
-    img: "/IMAGES/principal%20bibek%20raj%20kalouni.jpg",
+    img: "/assets-images/principal-bibek-raj-kalouni.jpg",
     quote:
       "Education at Western Public Academy is not the filling of a vessel, but the lighting of a flame.",
   },
   {
     name: "Mahesh Chaudhary",
     role: "Vice Principal",
-    img: "/IMAGES/vice-principal%20mahesh%20chaudhary.jpg",
+    img: "/assets-images/vice-principal-mahesh-chaudhary.jpg",
     quote:
       "Our students learn to question carefully, work patiently, and lead kindly.",
   },
   {
     name: "Bhoj Singh Rawal",
     role: "Asst. Administrator",
-    img: "/IMAGES/asst.%20adiministrator%20bhoj%20singh%20rawal.jpg",
+    img: "/assets-images/assistant-administrator-bhoj-singh-rawal.jpg",
     quote:
       "A well-run school is a quiet promise we keep — every day, for every student.",
   },
   {
     name: "Tulsi Chand",
     role: "Accountant",
-    img: "/IMAGES/tulsi%20chand%20accountant.jpg",
+    img: "/assets-images/tulsi-chand-accountant.jpg",
     quote:
       "Stewardship of resources is stewardship of opportunity for the next generation.",
   },
@@ -693,7 +693,7 @@ function BeyondClassrooms() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "url(/IMAGES/home-down-cover-photo.jpg)",
+            "url(/assets-images/home-down-cover-photo.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -729,10 +729,10 @@ function BeyondClassrooms() {
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8 reveal grid grid-cols-2 gap-3 self-end">
             {[
-              "/IMAGES/picnic-gallery.jpg",
-              "/IMAGES/teacher-picnic.jpg",
-              "/IMAGES/boating%20%2B%20picnic.jpg",
-              "/IMAGES/gal-22.jpg",
+              "/assets-images/picnic-gallery.jpg",
+              "/assets-images/teacher-picnic.jpg",
+              "/assets-images/boating-picnic.jpg",
+              "/assets-images/gal-22.jpg",
             ].map((src, idx) => (
               <div
                 key={src}
@@ -954,7 +954,7 @@ function CTA() {
         aria-hidden
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-1.jpg)",
+          backgroundImage: "url(/assets-images/background-img-1.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           mixBlendMode: "luminosity",

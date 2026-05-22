@@ -16,7 +16,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
 
-const HERO_IMAGE = "/IMAGES/BACKGROUND-IMG-3.jpg";
+const HERO_IMAGE = "/assets-images/background-img-3.jpg";
 
 type Stream = {
   id: string;
@@ -43,7 +43,7 @@ const STREAMS: Stream[] = [
     title: "Hotel Management",
     subtitle:
       "A hands-on hospitality stream for students who want to enter tourism, hotel operations, culinary practice, guest relations, and service leadership.",
-    image: "/IMAGES/HOTEL-MANAGEMENT.png",
+    image: "/assets-images/hotel-management.png",
     imageAlt: "Hotel Management practical learning at Western Public Academy",
     Icon: Hotel,
     tone: "Hospitality skills shaped by service discipline",
@@ -69,7 +69,7 @@ const STREAMS: Stream[] = [
     title: "Computer Science",
     subtitle:
       "A future-ready stream focused on computational thinking, programming logic, digital systems, and responsible use of technology.",
-    image: "/IMAGES/gallery-8.jpg",
+    image: "/assets-images/gallery-8.jpg",
     imageAlt: "Western Public Academy students participating in digital and academic activities",
     Icon: Laptop,
     tone: "Digital learning with analytical problem-solving",
@@ -95,7 +95,7 @@ const STREAMS: Stream[] = [
     title: "Sports Science",
     subtitle:
       "A stream for students interested in physical education, fitness, training science, sports leadership, and health-oriented careers.",
-    image: "/IMAGES/sports-science.jpeg",
+    image: "/assets-images/sports-science.jpeg",
     imageAlt: "Sports Science learning and athletics at Western Public Academy",
     Icon: Trophy,
     tone: "Physical performance guided by scientific understanding",
@@ -121,7 +121,7 @@ const STREAMS: Stream[] = [
     title: "Education",
     subtitle:
       "A thoughtful stream for future educators, mentors, social leaders, and students who want to understand learning, children, and community development.",
-    image: "/IMAGES/education-faculty.png",
+    image: "/assets-images/education-faculty.png",
     imageAlt: "Education faculty and teaching-learning environment at Western Public Academy",
     Icon: GraduationCap,
     tone: "Teacher preparation with community responsibility",

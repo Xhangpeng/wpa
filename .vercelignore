@@ -6,6 +6,5 @@ build
 .manus-logs
 responsive-test-output
 overflow_probe_output.jsonl
-public
 client/public/IMAGES
 *.log

@@ -3,7 +3,7 @@
  * Design: "Himalayan Heritage" editorial system — asymmetric layouts,
  * restrained palette (forest, brass, parchment, terracotta), Fraunces + Inter.
  */
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Megaphone,
   CalendarDays,
@@ -21,19 +21,12 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
+import { subscribeNotices } from "@/lib/adminContent";
+import type { NoticeCategory as ManagedNoticeCategory, NoticeItem } from "@/lib/adminContent";
 
 /* ─── Notice Data ─── */
-type NoticeCategory = "all" | "general" | "exams" | "academic" | "events";
-
-interface Notice {
-  id: string;
-  title: string;
-  date: string;
-  category: NoticeCategory;
-  description: string;
-  isNew?: boolean;
-  fullContent?: string;
-}
+type NoticeCategory = "all" | ManagedNoticeCategory;
+type Notice = NoticeItem;
 
 const NOTICES: Notice[] = [
   {
@@ -390,7 +383,7 @@ const TABS: { key: NoticeCategory; label: string }[] = [
 ];
 
 /* ─────────────────────── Hero (asymmetric editorial) ─────────────────────── */
-function NoticesHero() {
+function NoticesHero({ count }: { count: number }) {
   return (
     <section className="relative overflow-hidden">
       {/* Background image */}
@@ -473,7 +466,7 @@ function NoticesHero() {
                 }}
               />
               <div className="display-serif text-[36px]" style={{ color: "var(--color-forest-deep)", lineHeight: 1 }}>
-                {NOTICES.length}
+                {count}
                 <span style={{ color: "var(--color-brass)" }}>+</span>
               </div>
               <div className="eyebrow mt-2">Active Notices</div>
@@ -804,15 +797,17 @@ function AnnouncementsSection({
   activeTab,
   setActiveTab,
   onViewNotice,
+  notices,
 }: {
   activeTab: NoticeCategory;
   setActiveTab: (tab: NoticeCategory) => void;
   onViewNotice: (notice: Notice) => void;
+  notices: Notice[];
 }) {
   const filtered =
     activeTab === "all"
-      ? NOTICES
-      : NOTICES.filter((n) => n.category === activeTab);
+      ? notices
+      : notices.filter((n) => n.category === activeTab);
 
   return (
     <section
@@ -970,18 +965,24 @@ function QuickContact() {
 export default function Notices() {
   const [activeTab, setActiveTab] = useState<NoticeCategory>("all");
   const [viewingNotice, setViewingNotice] = useState<Notice | null>(null);
+  const [managedNotices, setManagedNotices] = useState<Notice[]>([]);
   useReveal();
+
+  useEffect(() => subscribeNotices(setManagedNotices), []);
+
+  const notices = managedNotices.length > 0 ? managedNotices : NOTICES;
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--color-parchment)" }}>
       <SiteHeader />
       <main className="flex-1">
-        <NoticesHero />
+        <NoticesHero count={notices.length} />
         <CategoryFilter onSelect={(cat) => setActiveTab(cat)} activeTab={activeTab} />
         <AnnouncementsSection
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           onViewNotice={(notice) => setViewingNotice(notice)}
+          notices={notices}
         />
         <QuickContact />
       </main>

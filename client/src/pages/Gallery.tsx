@@ -3,6 +3,7 @@ import { Camera, ChevronLeft, ChevronRight, Grid3X3, Sparkles, X, ZoomIn } from 
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
+import { subscribeGalleryItems } from "@/lib/adminContent";
 
 type CategoryId = "all" | "campus" | "programs" | "events" | "recreation" | "community";
 
@@ -92,9 +93,9 @@ const TILE_HEIGHTS = [
   "h-[300px] sm:h-[355px] lg:h-[405px]",
 ];
 
-function getCategoryCount(id: CategoryId) {
-  if (id === "all") return GALLERY_ITEMS.length;
-  return GALLERY_ITEMS.filter((item) => item.category === id).length;
+function getCategoryCount(id: CategoryId, items: GalleryItem[]) {
+  if (id === "all") return items.length;
+  return items.filter((item) => item.category === id).length;
 }
 
 function GalleryTile({ item, index, onSelect }: { item: GalleryItem; index: number; onSelect: (item: GalleryItem) => void }) {
@@ -216,16 +217,21 @@ export default function Gallery() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const [lightboxItems, setLightboxItems] = useState<GalleryItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [managedItems, setManagedItems] = useState<GalleryItem[]>([]);
+
+  useEffect(() => subscribeGalleryItems(setManagedItems), []);
+
+  const galleryItems = useMemo(() => [...managedItems, ...GALLERY_ITEMS], [managedItems]);
 
   const filteredItems = useMemo(() => {
-    if (activeCategory === "all") return GALLERY_ITEMS;
-    return GALLERY_ITEMS.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === "all") return galleryItems;
+    return galleryItems.filter((item) => item.category === activeCategory);
+  }, [activeCategory, galleryItems]);
 
   const visibleItems = filteredItems.slice(0, visibleCount);
   const remainingCount = Math.max(filteredItems.length - visibleItems.length, 0);
   const nextBatchCount = Math.min(LOAD_BATCH_SIZE, remainingCount);
-  const heroImages = GALLERY_ITEMS.filter((item) => item.featured).slice(0, 4);
+  const heroImages = galleryItems.filter((item) => item.featured).slice(0, 4);
 
   const openLightbox = (item: GalleryItem, collection: GalleryItem[]) => {
     const index = collection.findIndex((entry) => entry.id === item.id);
@@ -284,7 +290,7 @@ export default function Gallery() {
                 <div className="mt-7 flex flex-wrap gap-3">
                   <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em]" style={{ color: "var(--color-forest-deep)", border: "1px solid var(--color-parchment-deep)" }}>
                     <Camera size={15} style={{ color: "var(--color-brass-deep)" }} />
-                    {GALLERY_ITEMS.length} Photos
+                    {galleryItems.length} Photos
                   </div>
                   <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em]" style={{ background: "var(--color-forest-deep)", color: "var(--color-parchment)" }}>
                     <Sparkles size={15} style={{ color: "var(--color-brass)" }} />
@@ -299,7 +305,7 @@ export default function Gallery() {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => openLightbox(item, GALLERY_ITEMS)}
+                      onClick={() => openLightbox(item, galleryItems)}
                       className={`${index === 0 ? "col-span-6 sm:col-span-3 row-span-2 sm:row-span-3" : "col-span-6 sm:col-span-3 row-span-1"} group relative overflow-hidden rounded-[28px] soft-frame bg-white text-left transition-transform duration-300 hover:-translate-y-1`}
                       style={{
                         borderColor: "rgba(201,161,74,0.28)",
@@ -343,7 +349,7 @@ export default function Gallery() {
                       border: active ? "1px solid var(--color-forest-deep)" : "1px solid var(--color-parchment-deep)",
                     }}
                   >
-                    {category.label} <span style={{ opacity: 0.65 }}>({getCategoryCount(category.id)})</span>
+                    {category.label} <span style={{ opacity: 0.65 }}>({getCategoryCount(category.id, galleryItems)})</span>
                   </button>
                 );
               })}

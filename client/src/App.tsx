@@ -11,6 +11,7 @@ import Apply from "./pages/Apply";
 import About from "./pages/About";
 import Programs from "./pages/Programs";
 import Gallery from "./pages/Gallery";
+import Admin from "./pages/Admin";
 
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/academics/notices"} component={Notices} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/apply"} component={Apply} />
+      <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

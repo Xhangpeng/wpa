@@ -23,6 +23,7 @@ export default defineConfig({
           "react-vendor": ["react", "react-dom"],
           "ui-vendor": ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-navigation-menu"],
           "motion-vendor": ["framer-motion"],
+          "firebase-vendor": ["firebase/app", "firebase/auth", "firebase/firestore", "firebase/storage"],
         },
       },
     },

@@ -32,10 +32,10 @@ pnpm build
 
 The file `.github/workflows/deploy.yml` automatically builds and publishes the production site to GitHub Pages whenever code is pushed to the `main` branch. The workflow uses Node.js 22 and pnpm 10.4.1, uploads `dist/public` as the Pages artifact, and deploys it with GitHub's official Pages actions.
 
-After pushing to `technologyworld205/technologyworld205.github.io`, the expected public URL is:
+After pushing to `Xhangpeng/Xhangpeng.github.io`, the expected public URL is:
 
 ```text
-https://technologyworld205.github.io/
+https://Xhangpeng.github.io/
 ```
 
 ## Package Contents

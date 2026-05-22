@@ -28,15 +28,11 @@ pnpm check
 pnpm build
 ```
 
-## GitHub Pages Deployment
+## Vercel Deployment
 
-The file `.github/workflows/deploy.yml` automatically builds and publishes the production site to GitHub Pages whenever code is pushed to the `main` branch. The workflow uses Node.js 22 and pnpm 10.4.1, uploads `dist/public` as the Pages artifact, and deploys it with GitHub's official Pages actions.
+The project is ready to import into Vercel from `Xhangpeng/wpa`. Vercel should use the settings in `vercel.json`: install with `pnpm install --frozen-lockfile`, build with `pnpm run check && pnpm run build`, and serve `dist/public`.
 
-After pushing to `Xhangpeng/Xhangpeng.github.io`, the expected public URL is:
-
-```text
-https://Xhangpeng.github.io/
-```
+After connecting the GitHub repository to Vercel, each push to `main` can deploy automatically.
 
 ## Package Contents
 

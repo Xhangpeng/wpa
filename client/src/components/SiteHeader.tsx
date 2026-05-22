@@ -15,7 +15,7 @@ import { toast } from "sonner";
 // Routes that are actually implemented
 const IMPLEMENTED_ROUTES = ["/", "/about", "/about#our-story", "/about#messages", "/programs", "/programs/hotel-management", "/programs/computer-science", "/programs/sports-science", "/programs/education", "/gallery", "/academics/notices", "/contact", "/apply"];
 
-const LOGO = "/manus-storage/school-logo-circle-256_2612ab98.png";
+const LOGO = "/IMAGES/SCHOOL%27S%20LOGO.jpg";
 
 type NavItem = {
   label: string;

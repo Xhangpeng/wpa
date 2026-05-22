@@ -11,6 +11,7 @@ build/
 responsive-test-output/
 overflow_probe_output.jsonl
 .manus-logs/
+.temp/
 
 # Environment variables
 .env

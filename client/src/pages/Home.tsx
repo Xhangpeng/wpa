@@ -35,10 +35,10 @@ import SiteFooter from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
 
 const HERO_BGS = [
-  "/manus-storage/BACKGROUND-IMG-1_f0226305.jpg",
-  "/manus-storage/BACKGROUND-IMG-2_af8cbdf6.jpg",
-  "/manus-storage/BACKGROUND-IMG-3_2f26548e.jpg",
-  "/manus-storage/BACKGROUNDIMG4_37770fbe.jpg",
+  "/IMAGES/BACKGROUND-IMG-1.jpg",
+  "/IMAGES/BACKGROUND-IMG-2.jpg",
+  "/IMAGES/BACKGROUND-IMG-3.jpg",
+  "/IMAGES/BACKGROUND%20IMG%204.jpg",
 ];
 
 const PROGRAMS = [
@@ -47,7 +47,7 @@ const PROGRAMS = [
     eyebrow: "Hospitality",
     title: "Hotel Management",
     desc: "An applied program that blends classroom theory with kitchen, front-office, and service practice — opening doors across Nepal's growing tourism economy.",
-    img: "/manus-storage/HOTEL-MANAGEMENT_2acdb586.png",
+    img: "/IMAGES/HOTEL-MANAGEMENT.png",
     icon: Hotel,
     href: "/programs/hotel-management",
   },
@@ -56,7 +56,7 @@ const PROGRAMS = [
     eyebrow: "Computing",
     title: "Computer Science",
     desc: "Programming, digital systems, and computational thinking — equipping students for engineering, software, and data-driven futures.",
-    img: "/manus-storage/gallery-2_794d068d.jpg",
+    img: "/IMAGES/gallery-2.jpg",
     icon: Laptop,
     href: "/programs/computer-science",
   },
@@ -65,7 +65,7 @@ const PROGRAMS = [
     eyebrow: "Athletics & Health",
     title: "Sports Science",
     desc: "Human performance, kinesiology, and athletic training — for students passionate about sport, fitness, and physical education leadership.",
-    img: "/manus-storage/sports-science-cropped_bbd1e293.jpg",
+    img: "/IMAGES/sports-science.jpeg",
     icon: Trophy,
     href: "/programs/sports-science",
   },
@@ -74,7 +74,7 @@ const PROGRAMS = [
     eyebrow: "Pedagogy",
     title: "Education",
     desc: "A reflective track for future teachers — child psychology, curriculum, and classroom practice rooted in Nepali educational realities.",
-    img: "/manus-storage/education-faculty-cropped_26e06f3d.jpg",
+    img: "/IMAGES/education-faculty.png",
     icon: BookOpen,
     href: "/programs/education",
   },
@@ -121,44 +121,44 @@ const STATS = [
 ];
 
 const GALLERY = [
-  "/manus-storage/gallery-1_589fc84a.jpg",       // 0 - 4x2 hero (people in lawn)
-  "/manus-storage/gallery-5_8f12a865.jpg",       // 1 - 2x1
-  "/manus-storage/gal-13_65f6bd93.jpg",          // 2 - 2x1
-  "/manus-storage/picnic-gallery_cf5f7b49.jpg",  // 3 - 2x2 vertical
-  "/manus-storage/gallery-9_b25c0269.jpg",       // 4 - 2x2 vertical
-  "/manus-storage/gal-22_29534251.jpg",          // 5 - 2x1
-  "/manus-storage/gal-17_f8a63fe2.jpg",          // 6 - 2x1
-  "/manus-storage/teacher-picnic_ba3635cb.jpg",  // 7 - 2x1
-  "/manus-storage/boating-picnic_7abe223c.jpg",  // 8 - 2x1
-  "/manus-storage/home-down-cover-photo_9d6f0754.jpg", // 9 - 4x1 wide finale
+  "/IMAGES/gallery-1.jpg",       // 0 - 4x2 hero (people in lawn)
+  "/IMAGES/gallery-5.jpg",       // 1 - 2x1
+  "/IMAGES/gal-13.jpg",          // 2 - 2x1
+  "/IMAGES/picnic-gallery.jpg",  // 3 - 2x2 vertical
+  "/IMAGES/gallery-9.jpg",       // 4 - 2x2 vertical
+  "/IMAGES/gal-22.jpg",          // 5 - 2x1
+  "/IMAGES/gal-17.jpg",          // 6 - 2x1
+  "/IMAGES/teacher-picnic.jpg",  // 7 - 2x1
+  "/IMAGES/boating%20%2B%20picnic.jpg",  // 8 - 2x1
+  "/IMAGES/home-down-cover-photo.jpg", // 9 - 4x1 wide finale
 ];
 
 const HEADS = [
   {
     name: "Principal",
     role: "Head of Academy",
-    img: "/manus-storage/principal_5cc0958b.jpg",
+    img: "/IMAGES/principal.jpg",
     quote:
       "Education at Western Public Academy is not the filling of a vessel, but the lighting of a flame.",
   },
   {
     name: "Vice Principal",
     role: "Academic Affairs",
-    img: "/manus-storage/vice-principal_efa73d24.jpg",
+    img: "/IMAGES/vice-principal.jpg",
     quote:
       "Our students learn to question carefully, work patiently, and lead kindly.",
   },
   {
     name: "Administrator",
     role: "Operations",
-    img: "/manus-storage/administrator_2034585d.jpg",
+    img: "/IMAGES/administrator.jpg",
     quote:
       "A well-run school is a quiet promise we keep — every day, for every student.",
   },
   {
     name: "Accountant",
     role: "Finance Office",
-    img: "/manus-storage/accountant_5ac1ff74.jpg",
+    img: "/IMAGES/accountant.jpg",
     quote:
       "Stewardship of resources is stewardship of opportunity for the next generation.",
   },
@@ -693,7 +693,7 @@ function BeyondClassrooms() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "url(/manus-storage/home-down-cover-photo_9d6f0754.jpg)",
+            "url(/IMAGES/home-down-cover-photo.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -729,10 +729,10 @@ function BeyondClassrooms() {
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8 reveal grid grid-cols-2 gap-3 self-end">
             {[
-              "/manus-storage/picnic-gallery_cf5f7b49.jpg",
-              "/manus-storage/teacher-picnic_ba3635cb.jpg",
-              "/manus-storage/boating-picnic_7abe223c.jpg",
-              "/manus-storage/gal-22_29534251.jpg",
+              "/IMAGES/picnic-gallery.jpg",
+              "/IMAGES/teacher-picnic.jpg",
+              "/IMAGES/boating%20%2B%20picnic.jpg",
+              "/IMAGES/gal-22.jpg",
             ].map((src, idx) => (
               <div
                 key={src}
@@ -954,7 +954,7 @@ function CTA() {
         aria-hidden
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: "url(/manus-storage/BACKGROUND-IMG-1_f0226305.jpg)",
+          backgroundImage: "url(/IMAGES/BACKGROUND-IMG-1.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           mixBlendMode: "luminosity",

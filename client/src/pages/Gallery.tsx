@@ -16,7 +16,13 @@ type GalleryItem = {
   featured?: boolean;
 };
 
-const asset = (name: string) => `/gallery-assets/${name}`;
+const FILE_ALIASES: Record<string, string> = {
+  "BACKGROUNDIMG4.jpg": "BACKGROUND IMG 4.jpg",
+  "boating-picnic.jpg": "boating + picnic.jpg",
+  "school-logo.jpg": "SCHOOL'S LOGO.jpg",
+};
+
+const asset = (name: string) => `/IMAGES/${encodeURIComponent(FILE_ALIASES[name] ?? name)}`;
 
 const CATEGORIES: { id: CategoryId; label: string }[] = [
   { id: "all", label: "All" },

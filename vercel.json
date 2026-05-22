@@ -21,7 +21,7 @@
       ]
     },
     {
-      "source": "/manus-storage/(.*)",
+      "source": "/IMAGES/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -32,10 +32,10 @@ const ASSETS = {
   bg4: "/IMAGES/BACKGROUND%20IMG%204.jpg",
   cover: "/IMAGES/home-down-cover-photo.jpg",
   schoolHeads: "/IMAGES/school-heads.jpg",
-  principal: "/IMAGES/principal.jpg",
-  vicePrincipal: "/IMAGES/vice-principal.jpg",
-  administrator: "/IMAGES/administrator.jpg",
-  accountant: "/IMAGES/accountant.jpg",
+  principal: "/IMAGES/principal%20bibek%20raj%20kalouni.jpg",
+  vicePrincipal: "/IMAGES/vice-principal%20mahesh%20chaudhary.jpg",
+  administrator: "/IMAGES/asst.%20adiministrator%20bhoj%20singh%20rawal.jpg",
+  accountant: "/IMAGES/tulsi%20chand%20accountant.jpg",
   hotel: "/IMAGES/HOTEL-MANAGEMENT.png",
   education: "/IMAGES/education-faculty.png",
   sports: "/IMAGES/sports-science.jpeg",
@@ -106,16 +106,16 @@ const PROGRAM_SNAPSHOTS = [
 const LEADERSHIP_MESSAGES = [
   {
     id: "principal-message",
-    name: "Principal",
-    role: "Head of Academy",
+    name: "Bibek Raj Kalouni",
+    role: "Principal",
     img: ASSETS.principal,
     quote:
       "At Western Public Academy, our responsibility is not only to complete a course, but to shape learners who can think clearly, act responsibly, and move forward with courage.",
   },
   {
     id: "vice-principal-message",
-    name: "Vice Principal",
-    role: "Academic Affairs",
+    name: "Mahesh Chaudhary",
+    role: "Vice Principal",
     img: ASSETS.vicePrincipal,
     quote:
       "The strength of our school is built through daily discipline, careful teaching, honest feedback, and a supportive partnership between students, teachers, and guardians.",
@@ -123,8 +123,8 @@ const LEADERSHIP_MESSAGES = [
 ];
 
 const SUPPORT_TEAM = [
-  { name: "Administrator", role: "School Operations", img: ASSETS.administrator },
-  { name: "Accountant", role: "Finance Office", img: ASSETS.accountant },
+  { name: "Bhoj Singh Rawal", role: "Asst. Administrator", img: ASSETS.administrator },
+  { name: "Tulsi Chand", role: "Accountant", img: ASSETS.accountant },
 ];
 
 function AboutHero() {

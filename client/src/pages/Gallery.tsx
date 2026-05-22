@@ -19,6 +19,10 @@ type GalleryItem = {
 const FILE_ALIASES: Record<string, string> = {
   "BACKGROUNDIMG4.jpg": "BACKGROUND IMG 4.jpg",
   "boating-picnic.jpg": "boating + picnic.jpg",
+  "principal.jpg": "principal bibek raj kalouni.jpg",
+  "vice-principal.jpg": "vice-principal mahesh chaudhary.jpg",
+  "administrator.jpg": "asst. adiministrator bhoj singh rawal.jpg",
+  "accountant.jpg": "tulsi chand accountant.jpg",
   "school-logo.jpg": "SCHOOL'S LOGO.jpg",
 };
 
@@ -77,10 +81,10 @@ const GALLERY_ITEMS: GalleryItem[] = [
   { id: "recreation-02", title: "Outdoor Trip", category: "recreation", categoryLabel: "Trips", src: asset("boating-picnic.jpg"), alt: "Outdoor boating picnic at Western Public Academy" },
   { id: "recreation-03", title: "Teacher Picnic", category: "recreation", categoryLabel: "Trips", src: asset("teacher-picnic.jpg"), alt: "Teacher picnic at Western Public Academy" },
   { id: "community-01", title: "School Team", category: "community", categoryLabel: "Community", src: asset("school-heads.jpg"), alt: "Western Public Academy school leadership and team" },
-  { id: "community-02", title: "Principal", category: "community", categoryLabel: "Community", src: asset("principal.jpg"), alt: "Principal of Western Public Academy" },
-  { id: "community-03", title: "Vice Principal", category: "community", categoryLabel: "Community", src: asset("vice-principal.jpg"), alt: "Vice Principal of Western Public Academy" },
-  { id: "community-04", title: "Administrator", category: "community", categoryLabel: "Community", src: asset("administrator.jpg"), alt: "Administrator of Western Public Academy" },
-  { id: "community-05", title: "Accountant", category: "community", categoryLabel: "Community", src: asset("accountant.jpg"), alt: "Accountant of Western Public Academy" },
+  { id: "community-02", title: "Bibek Raj Kalouni", category: "community", categoryLabel: "Principal", src: asset("principal.jpg"), alt: "Bibek Raj Kalouni, Principal of Western Public Academy" },
+  { id: "community-03", title: "Mahesh Chaudhary", category: "community", categoryLabel: "Vice Principal", src: asset("vice-principal.jpg"), alt: "Mahesh Chaudhary, Vice Principal of Western Public Academy" },
+  { id: "community-04", title: "Bhoj Singh Rawal", category: "community", categoryLabel: "Asst. Administrator", src: asset("administrator.jpg"), alt: "Bhoj Singh Rawal, Assistant Administrator of Western Public Academy" },
+  { id: "community-05", title: "Tulsi Chand", category: "community", categoryLabel: "Accountant", src: asset("accountant.jpg"), alt: "Tulsi Chand, Accountant of Western Public Academy" },
 ];
 
 const INITIAL_VISIBLE_COUNT = 24;

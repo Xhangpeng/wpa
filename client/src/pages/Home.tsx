@@ -135,30 +135,30 @@ const GALLERY = [
 
 const HEADS = [
   {
-    name: "Principal",
-    role: "Head of Academy",
-    img: "/IMAGES/principal.jpg",
+    name: "Bibek Raj Kalouni",
+    role: "Principal",
+    img: "/IMAGES/principal%20bibek%20raj%20kalouni.jpg",
     quote:
       "Education at Western Public Academy is not the filling of a vessel, but the lighting of a flame.",
   },
   {
-    name: "Vice Principal",
-    role: "Academic Affairs",
-    img: "/IMAGES/vice-principal.jpg",
+    name: "Mahesh Chaudhary",
+    role: "Vice Principal",
+    img: "/IMAGES/vice-principal%20mahesh%20chaudhary.jpg",
     quote:
       "Our students learn to question carefully, work patiently, and lead kindly.",
   },
   {
-    name: "Administrator",
-    role: "Operations",
-    img: "/IMAGES/administrator.jpg",
+    name: "Bhoj Singh Rawal",
+    role: "Asst. Administrator",
+    img: "/IMAGES/asst.%20adiministrator%20bhoj%20singh%20rawal.jpg",
     quote:
       "A well-run school is a quiet promise we keep — every day, for every student.",
   },
   {
-    name: "Accountant",
-    role: "Finance Office",
-    img: "/IMAGES/accountant.jpg",
+    name: "Tulsi Chand",
+    role: "Accountant",
+    img: "/IMAGES/tulsi%20chand%20accountant.jpg",
     quote:
       "Stewardship of resources is stewardship of opportunity for the next generation.",
   },

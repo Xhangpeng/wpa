@@ -2,6 +2,8 @@
 
 The private dashboard lives at `/admin`.
 
+During setup, `/admin` also accepts the temporary access code `WESTERN`. That mode stores gallery and notice changes in the current browser only, so it is useful for testing the admin UI before Firebase is connected but it is not a production CMS. Remove or change that code before handing the site over publicly.
+
 ## Firebase services
 
 Enable these in the Firebase console:

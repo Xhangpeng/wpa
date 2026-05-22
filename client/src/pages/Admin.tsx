@@ -6,6 +6,7 @@ import {
   ArrowRight,
   CalendarDays,
   CheckCircle2,
+  KeyRound,
   ImagePlus,
   Images,
   LayoutDashboard,
@@ -31,13 +32,14 @@ import {
   adminEmails,
   auth,
   firebaseConfigured,
-  firebaseMissingEnv,
   googleProvider,
   isAllowedAdmin,
 } from "@/lib/firebase";
 
 type AdminTab = "gallery" | "notices";
 
+const ADMIN_ACCESS_CODE = "WESTERN";
+const LOCAL_ADMIN_SESSION_KEY = "wpa-admin-code-session";
 const noticeCategories: NoticeCategory[] = ["general", "academic", "exams", "events"];
 const galleryCategories = Object.keys(galleryCategoryLabels) as GalleryCategory[];
 
@@ -72,12 +74,20 @@ const inputClass =
   "mt-2 w-full rounded-xl border bg-white px-4 py-3 text-[14px] outline-none transition focus:ring-2";
 
 function AdminShell({
-  user,
+  adminLabel,
+  adminEmail,
+  modeLabel,
+  localMode,
+  onSignOut,
   activeTab,
   setActiveTab,
   children,
 }: {
-  user: User;
+  adminLabel: string;
+  adminEmail: string;
+  modeLabel: string;
+  localMode: boolean;
+  onSignOut: () => void;
   activeTab: AdminTab;
   setActiveTab: (tab: AdminTab) => void;
   children: ReactNode;
@@ -128,14 +138,17 @@ function AdminShell({
           <div className="mt-auto p-5">
             <div className="rounded-2xl border p-4" style={{ borderColor: "rgba(201,161,74,0.24)", background: "rgba(247,241,229,0.06)" }}>
               <div className="text-[12px] font-semibold" style={{ color: "var(--color-parchment)" }}>
-                {user.displayName || "Admin"}
+                {adminLabel}
               </div>
               <div className="mt-1 truncate text-[11px]" style={{ color: "rgba(247,241,229,0.58)" }}>
-                {user.email}
+                {adminEmail}
+              </div>
+              <div className="mt-3 inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em]" style={{ background: "rgba(201,161,74,0.14)", color: "var(--color-brass)" }}>
+                {modeLabel}
               </div>
               <button
                 type="button"
-                onClick={() => auth && signOut(auth)}
+                onClick={onSignOut}
                 className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em]"
                 style={{ background: "var(--color-brass)", color: "var(--color-forest-deep)" }}
               >
@@ -187,21 +200,59 @@ function AdminShell({
               </div>
             </div>
           </header>
-          <div className="px-4 py-6 sm:px-6 lg:px-8 xl:px-10">{children}</div>
+          <div className="px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
+            {localMode && (
+              <div className="mb-5 rounded-2xl border bg-white px-4 py-3 text-[13px] leading-relaxed" style={{ borderColor: "var(--color-parchment-deep)", color: "var(--color-ink-soft)" }}>
+                Temporary code access is active. Changes are saved in this browser until Firebase Google sign-in is configured.
+              </div>
+            )}
+            {children}
+          </div>
         </main>
       </div>
     </div>
   );
 }
 
-function SignInView() {
+function hasLocalAdminSession() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(LOCAL_ADMIN_SESSION_KEY) === "true";
+}
+
+function setLocalAdminSession(enabled: boolean) {
+  if (typeof window === "undefined") return;
+
+  if (enabled) window.localStorage.setItem(LOCAL_ADMIN_SESSION_KEY, "true");
+  else window.localStorage.removeItem(LOCAL_ADMIN_SESSION_KEY);
+}
+
+function SignInView({ onCodeAccepted }: { onCodeAccepted: () => void }) {
+  const [accessCode, setAccessCode] = useState("");
+
   const signIn = async () => {
-    if (!auth) return;
+    if (!auth) {
+      toast.info("Firebase Google sign-in is not connected yet. Use the access code for now.");
+      return;
+    }
+
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Google sign-in failed.");
     }
+  };
+
+  const submitCode = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (accessCode.trim().toUpperCase() !== ADMIN_ACCESS_CODE) {
+      toast.error("Access code is incorrect.");
+      return;
+    }
+
+    setLocalAdminSession(true);
+    onCodeAccepted();
+    toast.success("Temporary admin access enabled.");
   };
 
   return (
@@ -226,31 +277,55 @@ function SignInView() {
               Admin sign in
             </h2>
             <p className="mt-3 text-[14px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
-              Only emails listed in <code>VITE_ADMIN_EMAILS</code> can access this panel.
+              Use Google for production access. During setup, the temporary school access code can open a local admin session.
             </p>
 
-            {!firebaseConfigured ? (
-              <div className="mt-6 rounded-2xl border p-4" style={{ background: "#fff", borderColor: "var(--color-parchment-deep)" }}>
-                <div className="text-[13px] font-bold" style={{ color: "var(--color-terracotta)" }}>
-                  Firebase environment is not configured.
-                </div>
-                <ul className="mt-3 space-y-1 text-[12px]" style={{ color: "var(--color-ink-soft)" }}>
-                  {firebaseMissingEnv.map((key) => (
-                    <li key={key}><code>{key}</code></li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={signIn}
-                className="pill-btn mt-7 inline-flex w-full items-center justify-center gap-3 px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.14em]"
-                style={{ background: "var(--color-forest-deep)", color: "var(--color-parchment)" }}
-              >
-                Sign in with Google
-                <ArrowRight size={16} />
-              </button>
+            <button
+              type="button"
+              onClick={signIn}
+              className="pill-btn mt-7 inline-flex w-full items-center justify-center gap-3 px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.14em]"
+              style={{ background: "var(--color-forest-deep)", color: "var(--color-parchment)" }}
+            >
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-white font-bold normal-case tracking-normal" style={{ color: "var(--color-forest-deep)" }}>
+                G
+              </span>
+              Continue with Google
+              <ArrowRight size={16} />
+            </button>
+
+            {!firebaseConfigured && (
+              <p className="mt-3 rounded-xl border px-4 py-3 text-[12px] leading-relaxed" style={{ background: "#fff", borderColor: "var(--color-parchment-deep)", color: "var(--color-ink-soft)" }}>
+                Google sign-in will work after Firebase environment variables are added. Temporary code access is available now.
+              </p>
             )}
+
+            <div className="my-6 flex items-center gap-3">
+              <span className="h-px flex-1" style={{ background: "var(--color-parchment-deep)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--color-brass-deep)" }}>Or</span>
+              <span className="h-px flex-1" style={{ background: "var(--color-parchment-deep)" }} />
+            </div>
+
+            <form onSubmit={submitCode} className="rounded-2xl border bg-white p-4" style={{ borderColor: "var(--color-parchment-deep)" }}>
+              <FieldLabel>Access code</FieldLabel>
+              <div className="mt-2 flex gap-2">
+                <input
+                  type="password"
+                  value={accessCode}
+                  onChange={(event) => setAccessCode(event.target.value)}
+                  placeholder="Enter temporary code"
+                  className="min-w-0 flex-1 rounded-xl border px-4 py-3 text-[14px] outline-none transition focus:ring-2"
+                  style={{ borderColor: "var(--color-parchment-deep)" }}
+                />
+                <button
+                  type="submit"
+                  className="grid h-[46px] w-[52px] shrink-0 place-items-center rounded-xl"
+                  style={{ background: "var(--color-brass)", color: "var(--color-forest-deep)" }}
+                  aria-label="Unlock admin with access code"
+                >
+                  <KeyRound size={18} />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -283,7 +358,7 @@ function AccessDenied({ user }: { user: User }) {
   );
 }
 
-function GalleryManager({ items }: { items: GalleryItem[] }) {
+function GalleryManager({ items, localMode }: { items: GalleryItem[]; localMode: boolean }) {
   const [form, setForm] = useState<GalleryItem>(emptyGalleryForm);
   const [file, setFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
@@ -322,14 +397,14 @@ function GalleryManager({ items }: { items: GalleryItem[] }) {
     setSaving(true);
     try {
       if (form.id) {
-        await updateGalleryItem(form);
+        await updateGalleryItem(form, { local: localMode });
         toast.success("Gallery image updated.");
       } else {
         if (!file) {
           toast.error("Choose an image to upload.");
           return;
         }
-        await uploadGalleryImage(file, form);
+        await uploadGalleryImage(file, form, { local: localMode });
         toast.success("Gallery image added.");
       }
       reset();
@@ -436,7 +511,7 @@ function GalleryManager({ items }: { items: GalleryItem[] }) {
                     <Pencil size={13} />
                     Edit
                   </button>
-                  <button type="button" onClick={async () => { if (!window.confirm("Delete this gallery image?")) return; try { await deleteGalleryItem(item); toast.success("Gallery image deleted."); } catch (error) { toast.error(error instanceof Error ? error.message : "Could not delete image."); } }} className="pill-btn inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]" style={{ background: "#fff1ed", color: "var(--color-terracotta)" }}>
+                  <button type="button" onClick={async () => { if (!window.confirm("Delete this gallery image?")) return; try { await deleteGalleryItem(item, { local: localMode }); toast.success("Gallery image deleted."); } catch (error) { toast.error(error instanceof Error ? error.message : "Could not delete image."); } }} className="pill-btn inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]" style={{ background: "#fff1ed", color: "var(--color-terracotta)" }}>
                     <Trash2 size={13} />
                     Delete
                   </button>
@@ -456,7 +531,7 @@ function GalleryManager({ items }: { items: GalleryItem[] }) {
   );
 }
 
-function NoticesManager({ notices }: { notices: NoticeItem[] }) {
+function NoticesManager({ notices, localMode }: { notices: NoticeItem[]; localMode: boolean }) {
   const [form, setForm] = useState<Omit<NoticeItem, "id"> & { id?: string }>(emptyNoticeForm);
   const [saving, setSaving] = useState(false);
 
@@ -471,7 +546,7 @@ function NoticesManager({ notices }: { notices: NoticeItem[] }) {
 
     setSaving(true);
     try {
-      await saveNotice(form);
+      await saveNotice(form, { local: localMode });
       toast.success(form.id ? "Notice updated." : "Notice added.");
       reset();
     } catch (error) {
@@ -561,7 +636,7 @@ function NoticesManager({ notices }: { notices: NoticeItem[] }) {
                   <Pencil size={13} />
                   Edit
                 </button>
-                <button type="button" onClick={async () => { if (!window.confirm("Delete this notice?")) return; try { await deleteNotice(notice.id); toast.success("Notice deleted."); } catch (error) { toast.error(error instanceof Error ? error.message : "Could not delete notice."); } }} className="pill-btn inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]" style={{ background: "#fff1ed", color: "var(--color-terracotta)" }}>
+                <button type="button" onClick={async () => { if (!window.confirm("Delete this notice?")) return; try { await deleteNotice(notice.id, { local: localMode }); toast.success("Notice deleted."); } catch (error) { toast.error(error instanceof Error ? error.message : "Could not delete notice."); } }} className="pill-btn inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em]" style={{ background: "#fff1ed", color: "var(--color-terracotta)" }}>
                   <Trash2 size={13} />
                   Delete
                 </button>
@@ -583,6 +658,7 @@ function NoticesManager({ notices }: { notices: NoticeItem[] }) {
 export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(!auth);
+  const [codeMode, setCodeMode] = useState(hasLocalAdminSession);
   const [activeTab, setActiveTab] = useState<AdminTab>("gallery");
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [notices, setNotices] = useState<NoticeItem[]>([]);
@@ -595,17 +671,26 @@ export default function Admin() {
     });
   }, []);
 
-  const isAdmin = isAllowedAdmin(user?.email);
+  const isGoogleAdmin = isAllowedAdmin(user?.email);
+  const hasAdminAccess = codeMode || isGoogleAdmin;
 
   useEffect(() => {
-    if (!isAdmin) return;
-    const stopGallery = subscribeGalleryItems(setGalleryItems, (error) => toast.error(error.message));
-    const stopNotices = subscribeNotices(setNotices, (error) => toast.error(error.message));
+    if (!hasAdminAccess) return;
+    const contentOptions = { local: codeMode };
+    const stopGallery = subscribeGalleryItems(setGalleryItems, (error) => toast.error(error.message), contentOptions);
+    const stopNotices = subscribeNotices(setNotices, (error) => toast.error(error.message), contentOptions);
     return () => {
       stopGallery();
       stopNotices();
     };
-  }, [isAdmin]);
+  }, [codeMode, hasAdminAccess]);
+
+  const handleSignOut = async () => {
+    setLocalAdminSession(false);
+    setCodeMode(false);
+    if (auth) await signOut(auth);
+    setUser(null);
+  };
 
   if (!authReady) {
     return (
@@ -617,12 +702,17 @@ export default function Admin() {
     );
   }
 
-  if (!firebaseConfigured || !user) return <SignInView />;
-  if (!isAdmin || adminEmails.length === 0) return <AccessDenied user={user} />;
+  if (!codeMode && !user) return <SignInView onCodeAccepted={() => setCodeMode(true)} />;
+  if (!codeMode && (!isGoogleAdmin || adminEmails.length === 0) && user) return <AccessDenied user={user} />;
+
+  const localMode = codeMode;
+  const adminLabel = codeMode ? "Western Admin" : user?.displayName || "Admin";
+  const adminEmail = codeMode ? "Temporary access code" : user?.email ?? "";
+  const modeLabel = codeMode ? "Local code mode" : "Google verified";
 
   return (
-    <AdminShell user={user} activeTab={activeTab} setActiveTab={setActiveTab}>
-      {activeTab === "gallery" ? <GalleryManager items={galleryItems} /> : <NoticesManager notices={notices} />}
+    <AdminShell adminLabel={adminLabel} adminEmail={adminEmail} modeLabel={modeLabel} localMode={localMode} onSignOut={handleSignOut} activeTab={activeTab} setActiveTab={setActiveTab}>
+      {activeTab === "gallery" ? <GalleryManager items={galleryItems} localMode={localMode} /> : <NoticesManager notices={notices} localMode={localMode} />}
     </AdminShell>
   );
 }
